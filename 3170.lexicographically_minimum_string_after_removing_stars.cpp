@@ -1,4 +1,8 @@
 class Solution {
+    // O(n) time and space complexity
+    // Using a stack to track the indices of characters and a vector to mark which characters to keep
+    // When encountering a '*', we pop the last character from the stack and mark it as not to be included
+    // Finally, we construct the result string based on the marked characters
 public:
     string clearStars(string s) {
         vector<stack<int>> count(26);

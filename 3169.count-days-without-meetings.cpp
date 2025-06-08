@@ -7,6 +7,7 @@
 // @lc code=start
 class Solution {
 public:
+    
     int countDays(int days, vector<vector<int>>& meetings) {
         vector<int> start, end;
         for(int i=0; i<meetings.size(); i++) {
