@@ -18,7 +18,7 @@ private:
     };
     // dp[movie][shop]
     unordered_map<int, unordered_map<int, pair<int, bool>>> dp;
-    unordered_map<int, priority_queue<pair<int, int>, vector<pair<int, int>>, option>> unrented, rest;
+    unordered_map<int, priority_queue<pair<int, int>, vector<pair<int, int>>, option>> unrented;
     priority_queue<vector<int>, vector<vector<int>>, option1> rented;
     bool contain(int key) {
         return unrented.find(key)!=unrented.end(); 
@@ -40,7 +40,6 @@ public:
         int shop, price;
         pair<int, int> state;
         vector<int> ans;
-        cout << "Search: " << movie << endl;
         // check whether contains minHeap for movie or not
         if(!contain(movie) || unrented[movie].empty()) {
             for(auto it=dp[movie].begin(); it!=dp[movie].end(); it++) {
@@ -52,34 +51,17 @@ public:
             }
         }
         int top=5;
-        // get top 5 cheapest elements from unrented
+        // get top 5 cheapest elements from minHeap
         while(top>0 && !unrented[movie].empty()) {
             price=unrented[movie].top().first;
             shop=unrented[movie].top().second;
             unrented[movie].pop();
-            if(dp[movie][shop].second) {
-                cout << "Search :" << shop <<  " " << movie << endl;
-                int lastId=ans.size()-1;
-                if(lastId>=0 && !(shop==ans[lastId])) {
-                    ans.push_back(shop);
-                    top--;
-                } else if(lastId<0) {
-                    ans.push_back(shop);
-                    top--;
-                }
-            } else {
-                rest[movie].push({price, shop});
-            }
+            ans.push_back(shop);
+            top--;
         }
         for(int i=0; i<ans.size(); i++) {
-            price=dp[movie][ans[i]].first;
-            shop=ans[i];
-            unrented[movie].push({price, shop});
-        }
-        while(!rest[movie].empty()) {
-            price=rest[movie].top().first;
-            shop=rest[movie].top().second;
-            rest[movie].pop();
+            int shop=ans[i];
+            int price=dp[movie][shop].first;
             unrented[movie].push({price, shop});
         }
         return ans; 
@@ -87,14 +69,29 @@ public:
     
     void rent(int shop, int movie) {
         dp[movie][shop].second=false;
-        cout << "Rent: " << movie << " " << shop << endl;
         int price=dp[movie][shop].first;
         rented.push({price, shop, movie});
+        vector<pair<int, int>> temp;
+        while(contain(movie) && !unrented[movie].empty()) {
+            int curPrice=unrented[movie].top().first;
+            int curShop=unrented[movie].top().second;
+            unrented[movie].pop();
+            if(curShop==shop) {
+                break;
+            }
+            temp.push_back({curPrice, curShop});
+        }
+        for(int i=0; i<temp.size(); i++) {
+            unrented[movie].push(temp[i]);
+        }
     }
     
     void drop(int shop, int movie) {
         dp[movie][shop].second=true;
-        cout << "Drop: " << movie << " " << shop << endl;
+        int price=dp[movie][shop].first;
+        if(contain(movie)) {
+            unrented[movie].push({price, shop});
+        }
     }
     
     vector<vector<int>> report() {
@@ -107,7 +104,6 @@ public:
             movie=rented.top()[2]; 
             rented.pop();
             if(!dp[movie][shop].second) {
-                cout << "Report: " << price << " " << shop << " " << movie << endl;
                 int lastId=ans.size()-1;
                 if(lastId>=0 && !(shop==ans[lastId][0] && movie==ans[lastId][1])) {
                     ans.push_back({shop, movie});
@@ -136,3 +132,140 @@ public:
  * obj->drop(shop,movie);
  * vector<vector<int>> param_4 = obj->report();
  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
