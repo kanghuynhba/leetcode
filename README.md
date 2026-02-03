@@ -7,14 +7,45 @@ This is where I regularly push solutions to problems I solve on [LeetCode](https
 
 - 🗓 **Daily LeetCode**: I try to solve the daily challenge each day.
 - 🧠 **Focus**: Writing clean, efficient, and well-structured solutions.
-- 💻 **Language**: Most solutions are written in **C++**.
+- 💻 **Languages**: Solutions written in **C++** and **Rust**.
 - 🧩 **Topics Covered**: Data Structures, Algorithms, Dynamic Programming, Graphs, Trees, and more.
 
 ## 🛠️ Tools
 
-- 💬 **Language**: C++17 / C++20
+- 💬 **Languages**: 
+  - C++17 / C++20
+  - Rust (latest stable)
 - 🧪 **IDE**: Mostly Visual Studio Code / CLion
 - ✅ **Tested**: Using custom input/output or LeetCode built-in test runner.
+
+## 📁 Repository Structure
+
+```
+.
+├── cpp/          # C++ solutions
+├── rust/         # Rust solutions
+│   └── src/      # Rust source files
+├── Cargo.toml    # Rust project configuration
+└── README.md     # This file
+```
+
+## 🦀 Rust Setup
+
+To run Rust solutions:
+
+```bash
+# Run tests
+cargo test
+
+# Run specific test
+cargo test two_sum
+
+# Build the project
+cargo build
+
+# Build with optimizations
+cargo build --release
+```
 
 ## ✅ Goal
 
@@ -27,7 +58,7 @@ This repo serves as:
 
 If you're looking for:
 - Quick references to daily problems.
-- Sample implementations in C++.
+- Sample implementations in C++ and Rust.
 - Organized and clean code for standard problems.
 
 Then feel free to explore and clone/fork!
